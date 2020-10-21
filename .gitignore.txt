@@ -1,5 +1,4 @@
-es (107 sloc)  1.78 KB
-  
+ 
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -131,7 +130,10 @@ dmypy.json
 .pyre/
 
 # Pycharm files
+.idea/
 .idea
+/*.idea
+/.idea
 
 Hw2/
-Дз1/
+Hw1/
