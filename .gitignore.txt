@@ -133,5 +133,5 @@ dmypy.json
 # Pycharm files
 .idea
 
-/Hw2
-/Дз1
+Hw2/
+Дз1/
