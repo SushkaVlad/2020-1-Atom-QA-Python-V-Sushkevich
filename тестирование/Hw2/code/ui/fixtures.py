@@ -5,7 +5,6 @@ from selenium import webdriver
 from selenium.webdriver import ChromeOptions
 from webdriver_manager.chrome import ChromeDriverManager
 
-
 from ui.pages.auth_problem_page import AuthProblemPage
 from ui.pages.base_page import BasePage
 from ui.pages.create_company_page import CreateCompanyPage
@@ -82,16 +81,18 @@ def driver(config):
         options = ChromeOptions()
         options.add_argument("--window-size=800,600")
 
-        manager = ChromeDriverManager(version=version)
-        driver = webdriver.Chrome(executable_path=manager.install(),
-                                  options=options,
-                                  desired_capabilities={'acceptInsecureCerts': True}
-                                  )
-
-        # driver = webdriver.Remote(command_executor='http://127.0.0.1:4444/wd/hub/',
-        #                         options=options,
-        #                          desired_capabilities={'acceptInsecureCerts': True}
-        #                          )
+        if config['selenoid'] is not None:
+            selenoid_url = 'http://' + config['selenoid'] + '/wd/hub'
+            driver = webdriver.Remote(command_executor=selenoid_url,
+                                      options=options,
+                                      desired_capabilities={'acceptInsecureCerts': True}
+                                      )
+        else:
+            manager = ChromeDriverManager(version=version)
+            driver = webdriver.Chrome(executable_path=manager.install(),
+                                      options=options,
+                                      desired_capabilities={'acceptInsecureCerts': True}
+                                      )
 
     else:
         raise UsupportedBrowserException(f'Unsupported browser: "{browser}"')
