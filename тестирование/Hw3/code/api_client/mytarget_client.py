@@ -30,11 +30,8 @@ class MyTargetClient:
 
         if json:
             json_response = response.json()
-
-            if json_response.get('bStateError'):
-                error = json_response['sErrorMsg']
-                raise RequestErrorException(f'Request "{url}" dailed with error "{error}"!')
             return json_response
+
         return response
 
     def get_token(self):
@@ -108,11 +105,9 @@ class MyTargetClient:
         list_of_segments = response['items']
         for item in list_of_segments:
             if item.get('name') == str(name):
-                counter += 1
-        if counter:
-            return True
-        else:
-            return False
+                return True
+
+        return False
 
     def convert_name_to_id(self, name):
         id_by_name = 0
